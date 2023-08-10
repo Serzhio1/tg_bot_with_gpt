@@ -4,8 +4,12 @@ import logging
 from aiogram.filters.command import Command, CommandObject
 from aiogram import html
 from datetime import datetime
+from config import TOKEN_API
 
-bot = Bot(token='6461558599:AAEzMAEkXheZCREbW7B1xnpJSrMq5Y88XZw') # объект бота
+async def on_startup(_):
+    print('бот был успешно зарущен')
+
+bot = Bot(token=TOKEN_API) # объект бота
 dp = Dispatcher() # диспетчер
 
 @dp.message(Command('start'))
@@ -14,14 +18,14 @@ async def start(message: types.Message):
 
 @dp.message(Command('help'))
 async def help(message: types.Message):
-    await message.reply('чем я могу тебе помочь')
+    pass
 
 @dp.message(F.text)
 async def save_text(message: types.Message):
     pass
 
 async def main():
-    await dp.start_polling(bot)
+    await dp.start_polling(bot, on_startup=on_startup)
 
 
 if __name__ == '__main__':
