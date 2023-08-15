@@ -14,22 +14,22 @@ bot = Bot(token=TOKEN_API) # объект бота,
 dp = Dispatcher() # диспетчер
 
 @dp.message(Command('start'))
-async def start(message: types.Message):
+async def cdm_start(message: types.Message):
     await message.answer(text=start_message)
 
 @dp.message(Command('description'))
 async def cmd_description(message: types.Message):
     await message.reply(text=description_message)
 
-@dp.message(Command('search_companies'))
-async def cmd_choose_company(message: types.Message):
-    await message.answer("Выберете интересующую вас область: ", reply_markup=choose_category_keyboard)
-
 @dp.message(Command('help'))
 async def cmd_help(message: types.Message):
     await message.answer(text=HELP_COMMAND, parse_mode='HTML')
-@dp.message(F.text)
 
+@dp.message(Command('search_companies'))
+async def cmd_search_companies(message: types.Message):
+    await message.answer("Выберете интересующую вас область: ", reply_markup=choose_category_keyboard)
+
+@dp.message(F.text)
 async def handle_user_message(message: types.Message):
     array_of_category = ['Развитие проекта', 'Подборки', 'Продвижение', 'Образование и наука', 'Финансы', 'Полезные материалы']
     if message.text in array_of_category:
