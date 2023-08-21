@@ -24,5 +24,3 @@ df_groupby_category = df_groupby_category.groupby('category', as_index=False).ag
 
 # создаем словарь, где ключи - это уникальные значения колонки "category", а значения по ключам - это списки уникальных значений из колонки "subcategory"
 dict_category = dict(zip(df_groupby_category['category'], df_groupby_category['subcategory']))
-
-print(dict_category)
